@@ -96,10 +96,52 @@ class Prediction(Resource):
                                             eventTableName=eventTableName, deviceLogTableName=deviceLogTableName,
                                             connector=connector)
         if(result):
+            # Update result with startTime, endTime, y_device, x_device, eventID
+            result.update({"eventID":eventID})
+            result.update({"startTime":startTime})
+            result.update({"endTime":endTime})
+            result.update({"y_device":y_device})
+            result.update({"x_device":x_device})
+
+            return result, 200
+        return "An Error has Occured", 404
+
+class Devices(Resource):
+    def get(self):
+        args = predict_parser.parse_args()
+        eventID = args["eventID"]
+        startTime = args["startTime"]
+        endTime = args["endTime"]
+        host_ip = args["host_ip"]
+        database_name=args["database_name"]
+        user = args["user"]
+        password = args["password"]
+        port = args["port"]
+        sensor_kw =args["sensor_kw"]
+        device_kw = args["device_kw"]
+        eventTableName=args["eventTableName"]
+        deviceLogTableName=args["deviceLogTableName"]
+        connector=args["connector"]
+
+        result = service.getProductNames_fromEventID(eventID=eventID, startTime=startTime, endTime=endTime,
+                                            host_ip=host_ip, database_name= database_name,
+                                            user=user, password=password, port=port,
+                                            sensor_kw=sensor_kw, device_kw=device_kw,
+                                            eventTableName=eventTableName, deviceLogTableName=deviceLogTableName,
+                                            connector=connector)
+        if(result):
+            # Update result with startTime, endTime, y_device, x_device, eventID
+            result.update({"eventID":eventID})
+            result.update({"startTime":startTime})
+            result.update({"endTime":endTime})
+            result.update({"y_device":y_device})
+            result.update({"x_device":x_device})
+
             return result, 200
         return "An Error has Occured", 404
 
 api.add_resource(Prediction, "/predict")
+api.add_resource(Devices, "/devices")
 
 @app.route('/')
 def home():

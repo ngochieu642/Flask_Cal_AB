@@ -7,9 +7,16 @@ import re
 import time
 
 def isProduct(inputString):
-  return True if len(re.findall(r'^prd_.*$',inputString)) else False
+    '''
+    Check if the inputString start with prd_
+    '''
+    return True if len(re.findall(r'^prd_.*$',inputString)) else False
 
 def getProductsName(inputDataframe):
+    '''
+    This function receives a dataframe, each column is a device id
+    It will return a list of product name
+    '''
     allNames = list(inputDataframe.columns)
     product_name = [name for name in allNames if isProduct(name)]
     return product_name

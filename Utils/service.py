@@ -12,12 +12,12 @@ def getAB_fromEventID(eventID, startTime, endTime,
                         eventTableName = "Event", deviceLogTableName = "DeviceLog", connector="mysql"):
 
     try:
-        event_df = database.queryTable(tableName = eventTableName, 
+        event_df = database.queryTable(tableName = eventTableName,
                                         host_ip=host_ip, database_name=database_name,
                                         user=user, password=password, port=port,
                                         connector=connector)
 
-        deviceLog_df = database.queryTable(tableName = deviceLogTableName, 
+        deviceLog_df = database.queryTable(tableName = deviceLogTableName,
                                         host_ip=host_ip, database_name=database_name,
                                         user=user, password=password, port=port,
                                         connector=connector)
@@ -40,7 +40,7 @@ def getAB_fromEventID(eventID, startTime, endTime,
     except IOError as e:
         errno, strerror = e.args
         print("I/O error({0}): {1}".format(errno,strerror))
-        
+
         resultDict = {
             "errno" : errno,
             "error" : strerr
@@ -49,7 +49,7 @@ def getAB_fromEventID(eventID, startTime, endTime,
     except ValueError as e:
         errno, strerror = e.args
         print("I/O error({0}): {1}".format(errno,strerror))
-        
+
         resultDict = {
             "errno" : errno,
             "error" : strerr
@@ -86,7 +86,7 @@ def getProductNames_fromEventID(eventID, startTime, endTime,
     except IOError as e:
         errno, strerror = e.args
         print("I/O error({0}): {1}".format(errno,strerror))
-        
+
         resultDict = {
             "errno" : errno,
             "error" : strerr
@@ -95,7 +95,7 @@ def getProductNames_fromEventID(eventID, startTime, endTime,
     except ValueError as e:
         errno, strerror = e.args
         print("I/O error({0}): {1}".format(errno,strerror))
-        
+
         resultDict = {
             "errno" : errno,
             "error" : strerr

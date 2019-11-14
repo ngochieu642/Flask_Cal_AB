@@ -78,7 +78,7 @@ def queryTable(tableName, host_ip='172.25.0.1', database_name='sipiot',
             return object_df
 
         except Error as e:
-            print('Errpr while connecting to MySQL',e)
+            print('Error while connecting to MySQL',e)
             return None
         finally:
             connection.close()

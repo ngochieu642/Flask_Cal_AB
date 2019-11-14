@@ -6,7 +6,8 @@ from sklearn.model_selection import train_test_split
 
 def calculate_degree_1(inputDataframe, y_name, x_name, show_report=True, test_size=0.2):
     '''
-    This finction receives dataframe, it then will try to calculate y_name = A*x_name + B
+    This finction receives dataframe, y Column name, x column name
+    It then will try to calculate y_name = A*x_name + B
     The result format: (A,B)
     '''
     if (not y_name in inputDataframe.columns or not x_name in inputDataframe.columns):

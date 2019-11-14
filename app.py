@@ -106,9 +106,24 @@ class Prediction(Resource):
             return result, 200
         return "An Error has Occured", 404
 
+device_parser = reqparse.RequestParser()
+device_parser.add_argument('eventID', type=str, required=True)
+device_parser.add_argument('startTime', type=str, required=True)
+device_parser.add_argument('endTime', type=str, required=True)
+device_parser.add_argument('host_ip',type=str, required=False, default=maria_address)
+device_parser.add_argument('database_name',type=str, required=False, default=maria_database)
+device_parser.add_argument('user',type=str, required=False, default=maria_user)
+device_parser.add_argument('password', type=str, required=False, default=maria_password)
+device_parser.add_argument('port', type=str, required=False, default=maria_port)
+device_parser.add_argument('sensor_kw', type=str, required=False, default="sensors")
+device_parser.add_argument('device_kw', type=str, required=False, default="devices")
+device_parser.add_argument("eventTableName", type=str, required=False, default="Event")
+device_parser.add_argument("deviceLogTableName", type=str, required=False, default="DeviceLog")
+device_parser.add_argument("connector", type=str, required=False, default="mysql")
+
 class Devices(Resource):
     def get(self):
-        args = predict_parser.parse_args()
+        args = device_parser.parse_args()
         eventID = args["eventID"]
         startTime = args["startTime"]
         endTime = args["endTime"]
@@ -134,8 +149,6 @@ class Devices(Resource):
             result.update({"eventID":eventID})
             result.update({"startTime":startTime})
             result.update({"endTime":endTime})
-            result.update({"y_device":y_device})
-            result.update({"x_device":x_device})
 
             return result, 200
         return "An Error has Occured", 404

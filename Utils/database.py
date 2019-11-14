@@ -66,8 +66,11 @@ def queryTable(tableName, host_ip='172.25.0.1', database_name='sipiot',
     elif (connector=="sqlalchemy"):
         try:
             startTime = time.time()
+
             db_string = 'mysql+pymysql://' + user + ':' + str(password) + '@' + str(host_ip) + ':' + str(port) + '/' + database_name
+
             print('Connecting at: ', db_string)
+
             engine = db.create_engine(db_string)
             connection = engine.connect()
 

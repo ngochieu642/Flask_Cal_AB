@@ -108,15 +108,11 @@ class Prediction(Resource):
 
 device_parser = reqparse.RequestParser()
 device_parser.add_argument('eventID', type=str, required=True)
-device_parser.add_argument('startTime', type=str, required=True)
-device_parser.add_argument('endTime', type=str, required=True)
 device_parser.add_argument('host_ip',type=str, required=False, default=maria_address)
 device_parser.add_argument('database_name',type=str, required=False, default=maria_database)
 device_parser.add_argument('user',type=str, required=False, default=maria_user)
 device_parser.add_argument('password', type=str, required=False, default=maria_password)
 device_parser.add_argument('port', type=str, required=False, default=maria_port)
-device_parser.add_argument('sensor_kw', type=str, required=False, default="sensors")
-device_parser.add_argument('device_kw', type=str, required=False, default="devices")
 device_parser.add_argument("eventTableName", type=str, required=False, default="Event")
 device_parser.add_argument("deviceLogTableName", type=str, required=False, default="DeviceLog")
 device_parser.add_argument("connector", type=str, required=False, default="mysql")
@@ -125,33 +121,27 @@ class Devices(Resource):
     def get(self):
         args = device_parser.parse_args()
         eventID = args["eventID"]
-        startTime = args["startTime"]
-        endTime = args["endTime"]
         host_ip = args["host_ip"]
         database_name=args["database_name"]
         user = args["user"]
         password = args["password"]
         port = args["port"]
-        sensor_kw =args["sensor_kw"]
-        device_kw = args["device_kw"]
         eventTableName=args["eventTableName"]
         deviceLogTableName=args["deviceLogTableName"]
         connector=args["connector"]
 
-        result = service.getProductNames_fromEventID(eventID=eventID, startTime=startTime, endTime=endTime,
+        result = service.getProductNames_fromEventID(eventID=eventID,
                                             host_ip=host_ip, database_name= database_name,
                                             user=user, password=password, port=port,
-                                            sensor_kw=sensor_kw, device_kw=device_kw,
                                             eventTableName=eventTableName, deviceLogTableName=deviceLogTableName,
                                             connector=connector)
         if(result):
             # Update result with startTime, endTime, y_device, x_device, eventID
             result.update({"eventID":eventID})
-            result.update({"startTime":startTime})
-            result.update({"endTime":endTime})
+            
+            return result
 
-            return result, 200
-        return "An Error has Occured", 404
+        return {"error":"Unexpected Error in get Devices"}
 
 api.add_resource(Prediction, "/predict")
 api.add_resource(Devices, "/devices")

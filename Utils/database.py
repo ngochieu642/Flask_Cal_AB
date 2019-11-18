@@ -5,6 +5,7 @@ import pymysql
 import pandas as pd
 import re
 import time
+import ast
 
 def isProduct(inputString):
     '''

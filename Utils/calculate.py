@@ -10,8 +10,13 @@ def calculate_degree_1(inputDataframe, y_name, x_name, show_report=True, test_si
     It then will try to calculate y_name = A*x_name + B
     The result format: (A,B)
     '''
+    print("The dataframe used to calculate on has these columns: ", inputDataframe.columns)
+
     if (not y_name in inputDataframe.columns or not x_name in inputDataframe.columns):
-        print('Unavailable column name')
+        if not y_name in inputDataframe.columns:
+            print('Unavailable column name: ', y_name)
+        else:
+            print('Unavailable column name: ', x_name)
         return
 
     # Drop nan rows

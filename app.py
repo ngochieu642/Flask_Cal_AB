@@ -114,7 +114,6 @@ device_parser.add_argument('user',type=str, required=False, default=maria_user)
 device_parser.add_argument('password', type=str, required=False, default=maria_password)
 device_parser.add_argument('port', type=str, required=False, default=maria_port)
 device_parser.add_argument("eventTableName", type=str, required=False, default="Event")
-device_parser.add_argument("deviceLogTableName", type=str, required=False, default="DeviceLog")
 device_parser.add_argument("connector", type=str, required=False, default="mysql")
 
 class Devices(Resource):
@@ -127,18 +126,16 @@ class Devices(Resource):
         password = args["password"]
         port = args["port"]
         eventTableName=args["eventTableName"]
-        deviceLogTableName=args["deviceLogTableName"]
         connector=args["connector"]
 
         result = service.getProductNames_fromEventID(eventID=eventID,
                                             host_ip=host_ip, database_name= database_name,
                                             user=user, password=password, port=port,
-                                            eventTableName=eventTableName, deviceLogTableName=deviceLogTableName,
-                                            connector=connector)
+                                            eventTableName=eventTableName, connector=connector)
         if(result):
             # Update result with startTime, endTime, y_device, x_device, eventID
             result.update({"eventID":eventID})
-            
+
             return result
 
         return {"error":"Unexpected Error in get Devices"}

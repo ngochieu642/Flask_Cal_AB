@@ -18,7 +18,7 @@ def get_DeviceLog(deviceID_list, log_df):
     device_log_df = []
     for i in deviceID_list:
         device_log_df.append(log_df[log_df['device_id']==i])
-        
+
     return dict(zip(deviceID_list, device_log_df))
 
 def get_DeviceSensor_from_eventID(eventID, log_df, event_df, device_kw="devices", sensor_kw="formulaSensor"):

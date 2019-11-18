@@ -68,7 +68,7 @@ def getAB_fromEventID(eventID, startTime, endTime,
 def getProductNames_fromEventID(eventID,
                         host_ip="172.25.0.1", database_name="sipiot",
                         user="sip", password="^62UaE{]a)VT3{sp", port=33060,
-                        eventTableName = "Event", deviceLogTableName = "DeviceLog", connector="mysql"):
+                        eventTableName = "Event", connector="mysql"):
 
     try:
         event_df = database.queryTable(tableName = eventTableName, connector=connector)

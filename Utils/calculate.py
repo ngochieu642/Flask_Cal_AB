@@ -13,9 +13,11 @@ def calculate_degree_1(inputDataframe, y_name, x_name, show_report=True, test_si
     print("The dataframe used to calculate on has these columns: ", inputDataframe.columns)
 
     if (not y_name in inputDataframe.columns or not x_name in inputDataframe.columns):
+        
         if not y_name in inputDataframe.columns:
             print('Unavailable column name: ', y_name)
-        else:
+        
+        if not x_name in inputDataframe.columns:
             print('Unavailable column name: ', x_name)
         return
 

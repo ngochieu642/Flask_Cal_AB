@@ -304,7 +304,7 @@ def getClusterTable_fromEventID(event_id,
         else:
             return pd.DataFrame(columns=['time64','date'])
     except:
-        print('ERROR! Returns the dafault skeleton')
+        print('ERROR in getClusterTable_fromEventID! Returns the default skeleton')
         return pd.DataFrame(columns=['time64','date'])
 
 def getCleanDatafranme(inputDataframe):
